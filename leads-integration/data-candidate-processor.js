@@ -33,11 +33,6 @@ $(function () {
     /**
      * Helpers
      */
-    const cleanStrings = (value) => {
-        value = value.replace(/[^a-zA-Z ]/g, '');
-        return value;
-    };
-
     const splitFullName = (name, position) => {
         const zeroIndex = name.indexOf(' ') !== -1;
         const firstName = zeroIndex ? name.substring(0, name.indexOf(' ')) : name;
@@ -45,7 +40,7 @@ $(function () {
 
         const output = [firstName.trim(), lastName.trim()];
 
-        return cleanStrings(output[position]);
+        return output[position];
     };
 
     const getSource = (source) => {
