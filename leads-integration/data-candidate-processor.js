@@ -33,19 +33,23 @@ $(function () {
     /**
      * Helpers
      */
-    const cleanStrings = (value) => {
-        value = value.replace(/[^a-zA-Z ]/g, '');
-        return value;
-    };
-
     const splitFullName = (name, position) => {
-        const zeroIndex = name.indexOf(' ') !== -1;
-        const firstName = zeroIndex ? name.substring(0, name.indexOf(' ')) : name;
-        const lastName = zeroIndex ? name.substring(name.indexOf(' ')) : name;
+        name = name.replace(/[^a-zA-Z ]/g, '');
+        let firstName = '';
+        let lastName = '';
+
+        if (name !== '') {
+            const zeroIndex = name.indexOf(' ') !== -1;
+            firstName = zeroIndex ? name.substring(0, name.indexOf(' ')) : name;
+            lastName = zeroIndex ? name.substring(name.indexOf(' ')) : name;
+        } else {
+            firstName = 'Not';
+            lastName = 'Set';
+        }
 
         const output = [firstName.trim(), lastName.trim()];
 
-        return cleanStrings(output[position]);
+        return output[position];
     };
 
     const getSource = (source) => {
