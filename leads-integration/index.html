@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+			integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"></script>
+
+		<!-- <script src="test-processor.js"></script> -->
+		<!-- <script src="test-processor-2.js"></script> -->
+		<!-- <script src="test-processor-upgrade.js"></script> -->
+
+		<script src="data-candidate-processor.js"></script>
+		<script src="data-fields-processor.js"></script>
+
+		<script type="application/ld+json" id="headOutput">
+			{
+				"source": "fb",
+				"targetJob": "74262e7f-40c1-4537-bdf7-958f15098b70"
+			}
+		</script>
+
+		<script type="application/ld+json" id="bodyOutput">
+			{
+				"callTime": "Middag (12pm – 4pm)",
+				"email": "address@example.com",
+				"firstName": "©~!@#$%^&*()_+|}Hello ©World{:?><,./';[]=-`",
+				"lastName": "~!@#$%^&*()_+|}Hello World{:?><,./';[©]=-`",
+				"timeToStart": "Tomorrow",
+				"phoneNumber": "+1234567890",
+				"preferableContact" : "Whatsapp",
+				"speakWriteEnglish": "Ja",
+				"languageSkills": "Ja",
+                "reasonAbroad": "Text Ik  wil heel graag een nieuwe uitdaging op een mooi warm en zonnig eiland. Waar ik kan werken,wonen en leven 😍"
+			}
+		</script>
+
+		<script>
+			$(() => {
+				const headers = JSON.parse($('#headOutput')[0].innerText);
+				const headerObject = JSON.stringify(headers, undefined, 4);
+				$('#headerObject').html(`<pre>${headerObject}</pre>`);
+
+				const body = JSON.parse($('#bodyOutput')[0].innerText);
+				const bodyObject = JSON.stringify(body, undefined, 4);
+				$('#inputObject').html(`<pre>${bodyObject}</pre>`);
+			});
+		</script>
+	</head>
+	<body style="font-size: 15px">
+		<h2>Input object</h2>
+		<div id="headerObject"></div>
+		<div id="inputObject"></div>
+		<h2>Output object</h2>
+		<div id="candidateObject"></div>
+		<div id="fieldsObject"></div>
+	</body>
+</html>

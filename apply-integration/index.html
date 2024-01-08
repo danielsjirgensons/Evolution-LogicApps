@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+			integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"></script>
+
+		<!-- <script src="test-processor.js"></script> -->
+		<!-- <script src="test-processor-2.js"></script> -->
+		<!-- <script src="test-processor-upgrade.js"></script> -->
+
+		<script src="data-candidate-processor.js"></script>
+		<script src="data-fields-processor.js"></script>
+
+		<script type="application/ld+json" id="headOutput">
+			{
+				"source": "website",
+				"referrer": "undefined",
+				"targetJob": "743999926132293"
+			}
+		</script>
+
+		<script type="application/ld+json" id="bodyOutput">
+			{
+				"avatar": [],
+				"firstName": "Name",
+				"lastName": "Surname",
+				"country": "Lithuania",
+				"email": "change@applyforms.com",
+				"phoneNumber": "+37120154178",
+				"opportunitySource": "Google",
+				"shortDescription": "I would want tell you something about me",
+				"languageSkills": "Good",
+				"speakWriteEnglish": "No",
+				"preferableContact": "Email",
+				"reasonAbroad": "I want to tell you why I want to move abroad and start at Evolution",
+				"timeToStart": "I want to start at Evolution as soon as possible",
+				"targetJob": "743999926132293",
+				"resume": "CV_FILE_OBJECT"
+			}
+		</script>
+
+		<script>
+			$(() => {
+				const headers = JSON.parse($('#headOutput')[0].innerText);
+				const headerObject = JSON.stringify(headers, undefined, 4);
+				$('#headerObject').html(`<pre>${headerObject}</pre>`);
+
+				const body = JSON.parse($('#bodyOutput')[0].innerText);
+				const bodyObject = JSON.stringify(body, undefined, 4);
+				$('#inputObject').html(`<pre>${bodyObject}</pre>`);
+			});
+		</script>
+	</head>
+	<body style="font-size: 15px">
+		<h2>Input object</h2>
+		<div id="headerObject"></div>
+		<div id="inputObject"></div>
+		<h2>Output object</h2>
+		<div id="candidateObject"></div>
+		<div id="fieldsObject"></div>
+	</body>
+</html>

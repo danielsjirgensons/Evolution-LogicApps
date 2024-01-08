@@ -1,0 +1,170 @@
+{
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "createJoinLink": true,
+  "consent": true,
+  "phoneNumber": "string",
+  "location": {
+    "country": "string",
+    "countryCode": "string",
+    "regionCode": "string",
+    "region": "string",
+    "city": "string",
+    "lat": 0,
+    "lng": 0
+  },
+  "web": {
+    "skype": "string",
+    "linkedIn": "string",
+    "facebook": "string",
+    "twitter": "string",
+    "website": "string"
+  },
+  "tags": [
+    "string","string","string"
+  ],
+  "education": [
+    {
+      "institution": "string",
+      "degree": "string",
+      "major": "string",
+      "current": true,
+      "location": "string",
+      "startDate": "string",
+      "endDate": "string",
+      "description": "string"
+    }
+  ],
+  "experience": [
+    {
+      "title": "string",
+      "company": "string",
+      "current": true,
+      "startDate": "string",
+      "endDate": "string",
+      "location": "string",
+      "description": "string"
+    }
+  ],
+  "sourceDetails": {
+        "sourceTypeId": "string",
+        "sourceSubTypeId" : "string",
+        "sourceId": "string"
+  },
+  "avatar": {
+        "fileName": "jakub_lazinski_photo.jpg", 
+        "mimeType": "image/jpeg",
+        "fileContent": "{base64 encoded file content}"
+ 
+  },
+  "resume": {
+        "fileName": "cv_jakub_lazinski_photo.pdf", 
+        "mimeType": "application/pdf",
+        "fileContent": "{base64 encoded file content}"
+ 
+  },
+  "attachments": [
+    {
+        "fileName": "cover_letter.pdf", // display name
+        "mimeType": "application/pdf",
+        "fileContent": "{base64 encoded file content}"
+    }
+  ],
+  "messageToHiringManager": "string",<br />  "internal": false,
+  "answers": [
+    {
+        // Simple free text question answer
+        "id": "firstName#21124141",
+        "records": [
+           {
+              "fields": {
+                "value": ["John"]
+               }
+            }
+        ]
+    },
+    {
+        // Simple currency question answer
+        "id": "currency#8264685",
+        "records": [
+           {
+              "fields": {
+                "amount": ["100"]
+               }
+            }
+        ]
+    },
+    {
+        // Simple yes/no (radio) question answer
+        "id": "yesNo#68518625",
+        "records": [
+           {
+              "fields": {
+                "value": ["0"]
+               }
+            }
+        ]
+    },
+    {
+        // Simple checkbox question answer
+        "id": "checkbox#7812565",
+        "records": [
+           {
+              "fields": {
+                "confirm": ["1"]
+               }
+            }
+        ]
+    },
+    {
+        // Simple single select question answer
+        "id": "custom#51202421",
+        "records": [
+            {
+               "fields": {               
+                  "value": ["20194214124"] // option identifier
+                }
+            }
+        ]
+    },
+    {
+        // Simple multi select question answer
+        "id": "custom#51202421"
+        "records": [
+        "fields": {
+                "value": ["20194214124", "429412049124", "93193012312"] // option identifier
+                }
+        ]    
+    },
+    {
+        // Simple date question answer
+        "id": "dateOfBirth#5122449"
+        "records": [
+            {
+                "fields": {
+                   "value": ["2016-07-27"]
+                 }
+            }
+        ]    
+    },
+    {
+        // Complex repeatable question,
+        "id": "languages#5122449",
+        "records": [        
+            {
+                "fields": {
+                        "language": ["Polish"],
+                        "level": ["40291412"] // drop down option identifier
+                },
+            },
+            {
+                "fields" :{
+                        "language": ["English"],
+                        "level": ["982423423"] // drop down option identifier
+                }
+            }
+        ]
+    }
+  ]
+}

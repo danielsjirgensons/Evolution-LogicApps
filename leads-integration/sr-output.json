@@ -1,0 +1,13 @@
+{
+    "firstName": "string",
+    "lastName": "string",
+    "email": "string",
+    "phoneNumber": "string",
+
+    
+    "sourceDetails": {
+        "sourceTypeId": "ORGANIC",
+        "sourceSubTypeId" : "SOCIAL",
+        "sourceId": "ORGANIC"
+    }
+}

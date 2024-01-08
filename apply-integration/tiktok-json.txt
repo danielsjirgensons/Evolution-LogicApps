@@ -1,0 +1,19 @@
+// TikTok
+{
+  "Ben jij een Nederlandstalig?": "Ja",
+  "Kun jij basis Engels spreken en schrijven?": "Ja",
+  "Onze Live Casinos zijn bevestigd op Malta. Lijkt het jou leuk om naar het zonnige Malta te verhuizen? Wij betalen voor jou vliegticket en verblijf voor de eerste 20 nachten!": "Ja",
+  "Wanneer wil je gebeld worden?": "Middag (12pm – 4pm) ",
+  "ad_id": "1759068153210882",
+  "ad_name": "4/1_Dutch GP_EVO #3 Celine.m4v_NL-FMEdz-",
+  "adgroup_id": "1759067747370002",
+  "adgroup_name": "Malta_Netherlands/Belgium_A18-34_Dutch",
+  "campaign_id": "1759067739600914",
+  "campaign_name": "1480_March_2023_Malta/Madrid_Dutch Leads",
+  "create_time": "2023-03-03 09:10:57",
+  "email": "malone.maria1253@gmail.com",
+  "lead_id": "7206242199267197190",
+  "name": "Mustafoski Malone Maria ",
+  "page_id": "7200767895226482946",
+  "phone_number": "+32 468 03 72 65"
+}
