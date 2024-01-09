@@ -13,12 +13,24 @@ $(function () {
      * Helpers
      */
     const cleanValue = (value) => {
-        // Clean emojis
-        let output = value.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '');
-        // Trim text
-        output = output.trim();
+        // Remove specified characters
+        if (typeof value === 'string' || value instanceof String) {
+            // Remove HTML entities
+            var withoutHtmlEntities = value.replace(/&[a-zA-Z]+;/g, " ");
 
-        return output;
+            // Remove specified characters
+            var withoutSpecialChars = withoutHtmlEntities.replace(/[~^|}{><;`]/g, "");
+
+            // Remove emojis
+            var withoutEmojis = withoutSpecialChars.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, "");
+
+            // Remove ASCII symbols
+            var withoutAsciiSymbols = withoutEmojis.replace(/[^\w\s,.;?]/g, "");
+
+            return withoutAsciiSymbols.trim();
+        }
+
+        return false;
     };
 
     const setQuestions = (field, value) => {
@@ -49,7 +61,7 @@ $(function () {
                 break;
         }
 
-        if (fieldId !== '') {
+        if (fieldId !== '' && outputValue !== '') {
             return {
                 id: fieldId,
                 outputValue

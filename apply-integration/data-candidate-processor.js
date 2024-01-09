@@ -42,8 +42,23 @@ $(function () {
             outputObject[key] = bodyOutput[key];
         }
 
-        if(key === 'avatar'){
-            if(outputObject[key].length !== 0){
+        if (key === 'firstName') {
+            const firstName = outputObject[key];
+            outputObject[key] = (firstName !== '') ? firstName : 'Not';
+        }
+
+        if (key === 'lastName') {
+            const lastName = outputObject[key];
+
+            if (bodyOutput.firstName !== '') {
+                outputObject[key] = (lastName !== '') ? lastName : bodyOutput.firstName;
+            } else {
+                outputObject[key] = 'Set';
+            }
+        }
+
+        if (key === 'avatar') {
+            if (outputObject[key].length !== 0) {
                 outputObject[key] = bodyOutput[key];
             }
         }
