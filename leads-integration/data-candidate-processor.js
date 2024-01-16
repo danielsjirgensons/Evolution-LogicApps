@@ -35,6 +35,7 @@ $(function () {
      */
     const splitFullName = (name, position) => {
         name = name.replace(/[^a-zA-Z ]/g, '');
+        name = name.trim();
         let firstName = '';
         let lastName = '';
 
@@ -69,7 +70,7 @@ $(function () {
                 targetSource = '2d9e647f-ca18-4da7-9fb2-13c3de3641f1';
                 break;
             default:
-                targetSource = 'other_source_id';
+                targetSource = '09bd1373-5f90-470d-8baa-c617c82c10e1';
         }
 
         return targetSource;
@@ -95,7 +96,7 @@ $(function () {
 
     outputObject.sourceDetails = {
         "sourceTypeId": "PAID",
-        "sourceSubTypeId": "SOCIAL",
+        "sourceSubTypeId": "PAY_PER_PERFORMANCE",
         "sourceId": getSource(headerOutput.source)
     };
 
