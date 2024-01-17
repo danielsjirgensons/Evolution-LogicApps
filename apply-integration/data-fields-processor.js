@@ -64,7 +64,7 @@ $(function () {
         if (fieldId !== '' && outputValue !== '') {
             return {
                 id: fieldId,
-                outputValue
+                value: outputValue
             };
         }
     };

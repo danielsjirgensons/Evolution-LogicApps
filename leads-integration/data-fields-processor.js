@@ -45,15 +45,20 @@ $(function () {
             case 'timeToStart':
                 fieldId = '9bbd7c94-48a5-4e01-b6d5-1639296a152b';
                 break;
-            // Unused fields for testing purposes
             // case 'speakingDutch':
             //     fieldId = 'db234576-73a1-4a65-9c48-f2a33feb17b8';
+            //     break;
+            // case 'speakWriteEnglish':
+            //     fieldId = '2e8cb5be-ced8-45cf-aec4-951b7ae8def7';
             //     break;
             // case 'moveToMalta':
             //     fieldId = '5840a5de-bf22-4f55-a6de-701f0fa7a73c';
             //     break;
             // case 'callTime':
             //     fieldId = '59e2613b-f2f6-4ada-b3ab-341966024fcf';
+            //     break;
+            // case 'preferableContact':
+            //     fieldId = 'b22def21-4384-4a9d-8d2a-7e260c5c640c';
             //     break;
             // case 'reasonWhyEvolution':
             //     fieldId = '357ced0f-1fe7-4b2d-a453-326aaf4190c4';
@@ -63,7 +68,7 @@ $(function () {
         if (fieldId !== '' && outputValue !== '') {
             return {
                 id: fieldId,
-                outputValue
+                value: outputValue
             };
         }
     };
