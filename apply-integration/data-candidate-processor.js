@@ -39,12 +39,34 @@ $(function () {
 
     for (const key in bodyOutput) {
         if (candidateKeys.includes(key)) {
-            outputObject[key] = bodyOutput[key];
+            // Attachment worker
+            if (key === 'avatar' || key === 'resume') {
+                const value = bodyOutput[key];
+
+                if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+                    if (Object.keys(value).length !== 0) {
+                        if (value.fileName !== '' && value.mimeType !== '' && value.fileContent !== '') {
+                            outputObject[key] = bodyOutput[key];
+                        }
+                    }
+                }
+            } else {
+                outputObject[key] = bodyOutput[key];
+            }
         }
 
-        if(key === 'avatar'){
-            if(outputObject[key].length !== 0){
-                outputObject[key] = bodyOutput[key];
+        if (key === 'firstName') {
+            const firstName = outputObject[key];
+            outputObject[key] = (firstName !== '') ? firstName : 'Not';
+        }
+
+        if (key === 'lastName') {
+            const lastName = outputObject[key];
+
+            if (bodyOutput.firstName !== '') {
+                outputObject[key] = (lastName !== '') ? lastName : bodyOutput.firstName;
+            } else {
+                outputObject[key] = 'Set';
             }
         }
 

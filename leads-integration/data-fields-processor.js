@@ -1,24 +1,5 @@
 $(function () {
     /**
-     * TEST DATA
-    
-        "callTime": "Middag (12pm – 4pm)",
-        "email": "dariosiebelink1@gmail.com",
-        "firstName": "Dario siebelink",
-        "lastName": "Dario siebelink",
-        // "firstName": "باشا",
-        // "lastName": "باشا",
-        "moveToMalta": "Ja",
-        "phoneNumber": "+31636043334",
-        "speakWriteEnglish": "Ja",
-        "speakingDutch": "Ja"
-
-        source: 'meta',
-        // source: 'tiktok',
-        // source: 'linkedin',
-        targetJob: '74262e7f-40c1-4537-bdf7-958f15098b70'
-     */
-    /**
      * Initialize values
      */
     // var this_is_header_output = JSON.parse($('#headOutput')[0].innerText);
@@ -32,12 +13,16 @@ $(function () {
      * Helpers
      */
     const cleanValue = (value) => {
-        // Clean emojis
-        let output = value.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '');
-        // Trim text
-        output = output.trim();
+        // Remove specified characters
+        var withoutSpecialChars = value.replace(/[~^|}{><;`]/g, "");
 
-        return output;
+        // Remove emojis
+        var withoutEmojis = withoutSpecialChars.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, "");
+
+        // Remove ASCII symbols
+        var withoutAsciiSymbols = withoutEmojis.replace(/[^\w\s,.;?]/g, "");
+
+        return withoutAsciiSymbols.trim();
     };
 
     const setQuestions = (field, value) => {
@@ -80,10 +65,10 @@ $(function () {
             //     break;
         }
 
-        if (fieldId !== '') {
+        if (fieldId !== '' && outputValue !== '') {
             return {
                 id: fieldId,
-                outputValue
+                value: outputValue
             };
         }
     };
@@ -94,7 +79,7 @@ $(function () {
     for (const key in bodyOutput) {
         // Setting up candidate fields
         if (setQuestions(key, bodyOutput[key]) != null) {
-            console.log(key);
+            // console.log(key);
             outputObject.push(setQuestions(key, bodyOutput[key]));
         }
     }

@@ -34,9 +34,19 @@ $(function () {
      * Helpers
      */
     const splitFullName = (name, position) => {
-        const zeroIndex = name.indexOf(' ') !== -1;
-        const firstName = zeroIndex ? name.substring(0, name.indexOf(' ')) : name;
-        const lastName = zeroIndex ? name.substring(name.indexOf(' ')) : name;
+        name = name.replace(/[^a-zA-Z ]/g, '');
+        name = name.trim();
+        let firstName = '';
+        let lastName = '';
+
+        if (name !== '') {
+            const zeroIndex = name.indexOf(' ') !== -1;
+            firstName = zeroIndex ? name.substring(0, name.indexOf(' ')) : name;
+            lastName = zeroIndex ? name.substring(name.indexOf(' ')) : name;
+        } else {
+            firstName = 'Not';
+            lastName = 'Set';
+        }
 
         const output = [firstName.trim(), lastName.trim()];
 
@@ -60,7 +70,7 @@ $(function () {
                 targetSource = '2d9e647f-ca18-4da7-9fb2-13c3de3641f1';
                 break;
             default:
-                targetSource = 'other_source_id';
+                targetSource = '09bd1373-5f90-470d-8baa-c617c82c10e1';
         }
 
         return targetSource;
@@ -86,7 +96,7 @@ $(function () {
 
     outputObject.sourceDetails = {
         "sourceTypeId": "PAID",
-        "sourceSubTypeId": "SOCIAL",
+        "sourceSubTypeId": "PAY_PER_PERFORMANCE",
         "sourceId": getSource(headerOutput.source)
     };
 
