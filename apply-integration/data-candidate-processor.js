@@ -77,6 +77,10 @@ $(function () {
         }
     }
 
+    // Setting the source type
+    const sourceType = new Source();
+    outputObject.sourceDetails = sourceType.getSource(headerOutput.referrer);
+
     // outputObject.sourceDetails = {
     //     "sourceTypeId": "ORGANIC",
     //     "sourceSubTypeId": "CAREER_SITE",
