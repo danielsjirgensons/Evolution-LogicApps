@@ -9,11 +9,14 @@ class Source {
         if (data !== 'undefined') {
             let source = '';
             const referral = this.getReferral(data);
+            const notContainWebUrl = (value) => !/evolution\.com/i.test(value);
+
+            // TODO: check all urls - loop through (if server empty or return direct, check document referral etc.)
 
             if (referral !== null) {
-                if (referral.server !== '') {
+                if (referral.server !== '' && notContainWebUrl(referral.server)) {
                     source = referral.server;
-                } else if (referral.referrer !== '') {
+                } else if (referral.referrer !== '' && notContainWebUrl(referral.referrer)) {
                     source = referral.referrer;
                 } else {
                     source = referral.starting;
@@ -23,7 +26,7 @@ class Source {
             return this.filterSource(source);
         }
 
-        console.log(data);
+        console.log(data); // TODO: logging
         return this;
     }
 
@@ -47,7 +50,7 @@ class Source {
             case /\b(google|gclid)\b/i.test(source): // Google
                 this.sourceId = 'google_source_id';
                 break;
-            case /\b(facebook|fbclid)\b/i.test(source): // Facebook
+            case /\b(facebook|fbclid)\b/i.test(source) && !/instagram/i.test(source): // Facebook
                 this.sourceId = 'facebook_source_id';
                 break;
             // case /\binstagram\b/i.test(source):
@@ -79,7 +82,7 @@ class Source {
                 this.sourceId = 'tinder_source_id';
                 break;
             default:
-                console.log(source);
+                console.log(source); // TODO: logging
         }
 
         return this;
