@@ -34,7 +34,7 @@ $(function () {
      * Helpers
      */
     const splitFullName = (name, position) => {
-        name = name.replace(/[^a-zA-Z ]/g, '');
+        name = name.replace(/[^a-zA-Z ]/g, ''); // FIXME: 
         name = name.trim();
         let firstName = '';
         let lastName = '';
