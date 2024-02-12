@@ -22,6 +22,12 @@ class Source {
                 // Loop through all referrals to find source
                 keys.forEach((key) => {
                     if (source === '') {
+                        // Check if current page referral contains source
+                        if (!notContainWebUrl(this.referralData[key]) && this.filterSource(this.referralData[key]).sourceLabel !== 'direct') {
+                            source = this.referralData[key];
+                            return;
+                        }
+
                         if ((this.referralData[key] !== '' && notContainWebUrl(this.referralData[key]) || key === 'starting')) {
                             source = this.referralData[key];
                         }
@@ -95,8 +101,8 @@ class Source {
                 this.sourceLabel = 'tinder';
                 this.sourceId = 'tinder_source_id';
                 break;
-            default:
-                this.directSourceMessage();
+            // default:
+            //     this.directSourceMessage();
         }
 
         return this;
