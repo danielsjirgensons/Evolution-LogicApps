@@ -101,8 +101,8 @@ class Source {
                 this.sourceLabel = 'tinder';
                 this.sourceId = 'tinder_source_id';
                 break;
-            // default:
-            //     this.directSourceMessage();
+            default:
+                this.directSourceMessage();
         }
 
         return this;
