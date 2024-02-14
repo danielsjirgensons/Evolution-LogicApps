@@ -12,6 +12,10 @@ $(function () {
     /**
      * Helpers
      */
+    const cleanValue = (value) => {
+        return value.replace(/[^\p{L}\s]/ug, '');
+    };
+
     // const getSource = (source) => {
     //     let targetSource = '';
 
@@ -56,18 +60,24 @@ $(function () {
         }
 
         if (key === 'firstName') {
+            let name = '';
             const firstName = outputObject[key];
-            outputObject[key] = (firstName !== '') ? firstName : 'Not';
+            name = (firstName !== '') ? firstName : 'Not';
+
+            outputObject[key] = cleanValue(name);
         }
 
         if (key === 'lastName') {
+            let surname = '';
             const lastName = outputObject[key];
 
             if (bodyOutput.firstName !== '') {
-                outputObject[key] = (lastName !== '') ? lastName : bodyOutput.firstName;
+                surname = (lastName !== '') ? lastName : bodyOutput.firstName;
             } else {
-                outputObject[key] = 'Set';
+                surname = 'Set';
             }
+
+            outputObject[key] = cleanValue(surname);
         }
 
         if (key === 'country') {
