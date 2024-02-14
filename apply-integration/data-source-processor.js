@@ -30,6 +30,13 @@ class Source {
 
                         if ((this.referralData[key] !== '' && notContainWebUrl(this.referralData[key]) || key === 'starting')) {
                             source = this.referralData[key];
+
+                            // Double filter for facebook
+                            if (this.filterSource(source).sourceLabel === 'facebook') {
+                                if (key !== 'starting') {
+                                    source = '';
+                                }
+                            }
                         }
                     }
                 });
@@ -101,8 +108,21 @@ class Source {
                 this.sourceLabel = 'tinder';
                 this.sourceId = 'tinder_source_id';
                 break;
-            default:
-                this.directSourceMessage();
+            case /\byoutube\b/i.test(source): // YouTube
+                this.sourceLabel = 'youtube';
+                this.sourceId = 'youtube_source_id';
+                break;
+            // TEST: could be ?utm_source=studentjob
+            case /\bstudentjob.se\b/i.test(source): // studentjob.se
+                this.sourceLabel = 'studentjob.se';
+                this.sourceId = 'studentjob_source_id';
+                break;
+            case /\bvisidarbi\b/i.test(source): // visidarbi.lv
+                this.sourceLabel = 'visidarbi.lv';
+                this.sourceId = 'visidarbi_source_id';
+                break;
+            // default:
+            //     this.directSourceMessage();
         }
 
         return this;
