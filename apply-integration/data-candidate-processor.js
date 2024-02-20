@@ -87,11 +87,15 @@ $(function () {
         }
     }
 
-    // outputObject.sourceDetails = {
-    //     "sourceTypeId": "ORGANIC",
-    //     "sourceSubTypeId": "CAREER_SITE",
-    //     "sourceId": getSource(headerOutput.referrer)
-    // };
+    // Setting the source type
+    const sourceType = new Source();
+    const getSource = sourceType.getSource(headerOutput.referrer);
+
+    outputObject.sourceDetails = {
+        "sourceTypeId": "PAID",
+        "sourceSubTypeId": "BOARD",
+        "sourceId": getSource.sourceId ?? '11bb413e-6c88-459f-84ca-3049cefb1450'
+    };
 
     // Consent decision
     outputObject.consent = true;
