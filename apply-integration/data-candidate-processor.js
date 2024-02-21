@@ -87,15 +87,19 @@ $(function () {
         }
     }
 
-    // Setting the source type
-    const sourceType = new Source();
-    const getSource = sourceType.getSource(headerOutput.referrer);
+    // Setting the source type (BETA - for Latvia)
+    const pageURL = headerOutput.pageURL;
 
-    outputObject.sourceDetails = {
-        "sourceTypeId": "PAID",
-        "sourceSubTypeId": "BOARD",
-        "sourceId": getSource.sourceId ?? '11bb413e-6c88-459f-84ca-3049cefb1450'
-    };
+    if (/\b\/latvia\/\b/i.test(pageURL)) {
+        const sourceType = new Source();
+        const getSource = sourceType.getSource(headerOutput.referrer);
+
+        outputObject.sourceDetails = {
+            "sourceTypeId": "PAID",
+            "sourceSubTypeId": "BOARD",
+            "sourceId": getSource.sourceId ?? '11bb413e-6c88-459f-84ca-3049cefb1450'
+        };
+    }
 
     // Consent decision
     outputObject.consent = true;
