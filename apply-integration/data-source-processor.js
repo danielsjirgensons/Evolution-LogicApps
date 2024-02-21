@@ -71,8 +71,8 @@ class Source {
                 this.sourceLabel = 'facebook';
                 this.sourceId = 'facebook_source_id';
                 break;
-            // case /\binstagram\b/i.test(source):
-            case /instagram/i.test(source) && !/fbclid/i.test(source): // Instagram
+            case /\binstagram\b/i.test(source):
+            // case /instagram/i.test(source) && !/fbclid/i.test(source): // Instagram
                 this.sourceLabel = 'instagram';
                 this.sourceId = 'instagram_source_id';
                 break;
