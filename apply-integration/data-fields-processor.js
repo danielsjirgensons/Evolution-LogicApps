@@ -14,28 +14,27 @@ $(function () {
      */
     const cleanValue = (value) => {
         // Remove specified characters
-        if (typeof value === 'string' || value instanceof String) {
-            // Remove HTML entities
-            var withoutHtmlEntities = value.replace(/&[a-zA-Z]+;/g, " ");
+        // if (typeof value === 'string' || value instanceof String) {
+        // Remove HTML entities
+        var withoutHtmlEntities = value.replace(/&[a-zA-Z]+;/g, " ");
 
-            // Remove specified characters
-            var withoutSpecialChars = withoutHtmlEntities.replace(/[~^|}{><;`]/g, "");
+        // Remove specified characters
+        var withoutSpecialChars = withoutHtmlEntities.replace(/[~^|}{><;`]/g, "");
 
-            // Remove emojis
-            var withoutEmojis = withoutSpecialChars.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, "");
+        // Remove emojis
+        var withoutEmojis = withoutSpecialChars.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, "");
 
-            // Remove ASCII symbols
-            var withoutAsciiSymbols = withoutEmojis.replace(/[^\w\s,.;?]/g, "");
+        // Remove ASCII symbols
+        var withoutAsciiSymbols = withoutEmojis.replace(/[^\w\s,.;?]/g, "");
 
-            return withoutAsciiSymbols.trim();
-        }
+        return withoutAsciiSymbols.trim();
+        // }
 
-        return false;
+        // return false;
     };
 
     const setQuestions = (field, value) => {
         let fieldId = '';
-        const outputValue = cleanValue(value);
 
         switch (field) {
             case 'opportunitySource':
@@ -61,10 +60,10 @@ $(function () {
                 break;
         }
 
-        if (fieldId !== '' && outputValue !== '') {
+        if (fieldId !== '' && value !== '') {
             return {
                 id: fieldId,
-                value: outputValue
+                value: cleanValue(value)
             };
         }
     };
