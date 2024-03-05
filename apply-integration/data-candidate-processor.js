@@ -61,23 +61,20 @@ $(function () {
 
         if (key === 'firstName') {
             let name = '';
-            const firstName = outputObject[key];
-            name = (firstName !== '') ? firstName : 'Not';
+            const firstName = cleanValue(outputObject[key]);
+            name = (firstName !== '') ? firstName : 'Unknown';
 
-            outputObject[key] = cleanValue(name);
+            outputObject[key] = name;
         }
 
         if (key === 'lastName') {
-            let surname = '';
-            const lastName = outputObject[key];
+            let surname = cleanValue(outputObject[key]);
 
-            if (bodyOutput.firstName !== '') {
-                surname = (lastName !== '') ? lastName : bodyOutput.firstName;
-            } else {
-                surname = 'Set';
+            if (surname === '') {
+                surname = 'Unknown';
             }
 
-            outputObject[key] = cleanValue(surname);
+            outputObject[key] = surname;
         }
 
         if (key === 'country') {
