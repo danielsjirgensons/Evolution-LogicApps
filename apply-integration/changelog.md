@@ -1,3 +1,7 @@
+# 0.7.1 - 22.02.2024
+- Added additional sources in filter
+- Changed source IDs to SR IDs
+
 # 0.7 - 21.02.2024
 - Added source setup only for Latvia (in BETA)
 
