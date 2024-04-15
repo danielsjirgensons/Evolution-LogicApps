@@ -63,7 +63,7 @@ class Source {
 
     filterSource(source) {
         switch (true) {
-            case /\b(google|googleads|gclid|adsensecustomsearchads|googlesyndication)\b/i.test(source): // Google
+            case /\b(google|googleads|gclid|adsensecustomsearchads|googlesyndication|syndicatedsearch\.goog|utm_source=google)\b/i.test(source): // Google
                 this.sourceLabel = 'google';
                 this.sourceId = 'd74ccbf5-53b2-4024-b5f1-475643dd2e14';
                 break;

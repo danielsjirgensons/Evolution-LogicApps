@@ -1,3 +1,6 @@
+# 0.7.2 - 15.04.2024
+- Added new type for Google sources
+
 # 0.7.1 - 22.02.2024
 - Added additional sources in filter
 - Changed source IDs to SR IDs
