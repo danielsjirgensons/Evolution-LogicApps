@@ -44,8 +44,8 @@ $(function () {
             firstName = zeroIndex ? name.substring(0, name.indexOf(' ')) : name;
             lastName = zeroIndex ? name.substring(name.indexOf(' ')) : name;
         } else {
-            firstName = 'Not';
-            lastName = 'Set';
+            firstName = 'Unknown';
+            lastName = 'Unknown';
         }
 
         const output = [firstName.trim(), lastName.trim()];
