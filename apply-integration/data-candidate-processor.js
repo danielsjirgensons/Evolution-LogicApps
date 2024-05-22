@@ -12,6 +12,10 @@ $(function () {
     /**
      * Helpers
      */
+    const cleanValue = (value) => {
+        return value.replace(/[^\p{L}\s]/ug, '');
+    };
+
     // const getSource = (source) => {
     //     let targetSource = '';
 
@@ -56,18 +60,20 @@ $(function () {
         }
 
         if (key === 'firstName') {
-            const firstName = outputObject[key];
-            outputObject[key] = (firstName !== '') ? firstName : 'Not';
+            let name = cleanValue(outputObject[key]);
+            name = (name !== '') ? name : 'Unknown';
+
+            outputObject[key] = name;
         }
 
         if (key === 'lastName') {
-            const lastName = outputObject[key];
+            let surname = cleanValue(outputObject[key]);
 
-            if (bodyOutput.firstName !== '') {
-                outputObject[key] = (lastName !== '') ? lastName : bodyOutput.firstName;
-            } else {
-                outputObject[key] = 'Set';
+            if (surname === '') {
+                surname = 'Unknown';
             }
+
+            outputObject[key] = surname;
         }
 
         if (key === 'country') {
@@ -77,7 +83,6 @@ $(function () {
         }
     }
 
-    // Setting the source type
     const sourceType = new Source();
     const getSource = sourceType.getSource(headerOutput.referrer);
 
