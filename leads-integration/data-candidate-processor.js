@@ -44,8 +44,8 @@ $(function () {
             firstName = zeroIndex ? name.substring(0, name.indexOf(' ')) : name;
             lastName = zeroIndex ? name.substring(name.indexOf(' ')) : name;
         } else {
-            firstName = 'Not';
-            lastName = 'Set';
+            firstName = 'Unknown';
+            lastName = 'Unknown';
         }
 
         const output = [firstName.trim(), lastName.trim()];
@@ -79,32 +79,51 @@ $(function () {
     /**
      * Data processor
      */
-    const candidateKeys = ['firstName', 'lastName', 'email', 'phoneNumber'];
+    const requiredFields = ['firstName', 'lastName', 'email', 'phoneNumber'];
 
-    for (const key in bodyOutput) {
-        if (candidateKeys.includes(key)) {
-            if (key === 'firstName') {
-                outputObject[key] = splitFullName(bodyOutput[key], 0);
-            } else if (key === 'lastName') {
-                const lastName = splitFullName(bodyOutput[key], 1);
-                outputObject[key] = (lastName === '') ? outputObject.firstName : lastName;
-            } else {
-                outputObject[key] = bodyOutput[key];
+    const checkRequiredFields = (fields) => {
+        const missing = [];
+
+        fields.forEach(key => {
+            if (!Object.keys(bodyOutput).includes(key)) {
+                missing.push(key);
+            }
+        });
+
+        return missing;
+    };
+
+    // Checking if all required fields are present
+    if (checkRequiredFields(requiredFields).length === 0) {
+        for (const key in bodyOutput) {
+            if (requiredFields.includes(key)) {
+                if (key === 'firstName') {
+                    outputObject[key] = splitFullName(bodyOutput[key], 0);
+                } else if (key === 'lastName') {
+                    const lastName = splitFullName(bodyOutput[key], 1);
+                    outputObject[key] = (lastName === '') ? outputObject.firstName : lastName;
+                } else {
+                    outputObject[key] = bodyOutput[key];
+                }
             }
         }
+
+        outputObject.sourceDetails = {
+            "sourceTypeId": "PAID",
+            "sourceSubTypeId": "PAY_PER_PERFORMANCE",
+            "sourceId": getSource(headerOutput.source)
+        };
+
+        // Consent decision
+        outputObject.consent = true;
+        outputObject.consentDecisions = {
+            social: true
+        };
+    } else {
+        const missingKeys = checkRequiredFields(requiredFields);
+        outputObject.status = 'error';
+        outputObject.message = 'Missing field/-s: ' + missingKeys.toString();
     }
-
-    outputObject.sourceDetails = {
-        "sourceTypeId": "PAID",
-        "sourceSubTypeId": "PAY_PER_PERFORMANCE",
-        "sourceId": getSource(headerOutput.source)
-    };
-
-    // Consent decision
-    outputObject.consent = true;
-    outputObject.consentDecisions = {
-        social: true
-    };
 
     /*****************************************
      * Output object for testing
