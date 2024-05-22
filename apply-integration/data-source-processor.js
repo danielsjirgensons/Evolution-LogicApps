@@ -31,6 +31,13 @@ class Source {
                         if ((this.referralData[key] !== '' && notContainWebUrl(this.referralData[key]) || key === 'starting')) {
                             source = this.referralData[key];
 
+                            // Double check for direct
+                            if (this.filterSource(source).sourceLabel === 'direct') {
+                                if (key !== 'starting') {
+                                    source = '';
+                                }
+                            }
+
                             // Double filter for facebook
                             if (this.filterSource(source).sourceLabel === 'facebook') {
                                 if (key !== 'starting') {
@@ -55,15 +62,19 @@ class Source {
         try {
             referral = JSON.parse(data);
         } catch (e) {
+            // TODO: try parse URL 
+            console.log('cannot parse JSON');
             referral = null;
         }
 
         return referral;
     }
 
+    // TODO: create a method for parse new referrer from URL
+
     filterSource(source) {
         switch (true) {
-            case /\b(google|googleads|gclid|adsensecustomsearchads|googlesyndication|syndicatedsearch\.goog|utm_source=google)\b/i.test(source): // Google
+            case /\b(google|googleads|gclid|gad_source|adsensecustomsearchads|googlesyndication|syndicatedsearch\.goog|utm_source=google)\b/i.test(source): // Google
                 this.sourceLabel = 'google';
                 this.sourceId = 'd74ccbf5-53b2-4024-b5f1-475643dd2e14';
                 break;
@@ -71,7 +82,7 @@ class Source {
                 this.sourceLabel = 'bing';
                 this.sourceId = '28934fe0-0db1-4637-b28c-5fd4352ef40e';
                 break;
-            case /\b(facebook|fbclid)\b/i.test(source) && !/instagram/i.test(source): // Facebook
+            case /\b(facebook|fbclid|utm_source=meta)\b/i.test(source) && !/instagram/i.test(source): // Facebook
                 this.sourceLabel = 'facebook';
                 this.sourceId = '2e635be6-2d38-414f-90d5-9bb99f86c908';
                 break;
