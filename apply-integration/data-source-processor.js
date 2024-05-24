@@ -10,10 +10,10 @@ class Source {
         console.log(`DIRECT SOURCE: ${this.sourceLabel} - ${referralData}`);
     }
 
-    getSource(data) {
+    getSource(data, pageUrl) {
         if (data !== 'undefined') {
             let source = '';
-            this.referralData = this.getReferral(data);
+            this.referralData = this.getReferral(data, pageUrl);
             const notContainWebUrl = (value) => !/evolution\.com/i.test(value);
 
             if (this.referralData !== null) {
@@ -56,21 +56,45 @@ class Source {
         return this;
     }
 
-    getReferral(data) {
+    getReferral(data, pageUrl) {
         let referral = '';
 
         try {
             referral = JSON.parse(data);
         } catch (e) {
-            // TODO: try parse URL 
-            console.log('cannot parse JSON');
-            referral = null;
+            // Check if referral data contains simple URL
+            if (this.referralIsUrl(data)) {
+                referral = {
+                    starting: pageUrl,
+                    server: data,
+                    referrer: '',
+                };
+            } else {
+                referral = null;
+            }
         }
 
         return referral;
     }
 
-    // TODO: create a method for parse new referrer from URL
+    // Check if referral data contains URL
+    referralIsUrl(url) {
+        let isUrl;
+
+        try {
+            const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+                '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
+                '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+                '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+                '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+                '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+            isUrl = pattern.test(url);
+        } catch (e) {
+            isUrl = false;
+        }
+
+        return isUrl;
+    }
 
     filterSource(source) {
         switch (true) {
@@ -132,7 +156,7 @@ class Source {
                 this.sourceLabel = 'ejobs.ro';
                 this.sourceId = '872ca014-f86f-4790-8999-4a1cfb4bf686';
                 break;
-            
+
             /**
              * Latvia specific sources
              */
@@ -152,7 +176,7 @@ class Source {
                 this.sourceLabel = 'ss.lv';
                 this.sourceId = 'a53a5166-825a-409c-b192-a385dbea630f';
                 break;
-            
+
             /**
              * Georgia specific sources
              */

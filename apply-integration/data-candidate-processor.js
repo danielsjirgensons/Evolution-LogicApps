@@ -84,7 +84,7 @@ $(function () {
     }
 
     const sourceType = new Source();
-    const getSource = sourceType.getSource(headerOutput.referrer);
+    const getSource = sourceType.getSource(headerOutput.referrer, headerOutput.pageURL);
 
     outputObject.sourceDetails = {
         "sourceTypeId": "PAID",

@@ -1,3 +1,7 @@
+# 0.8.0 - 24.05.2024
+- Added plain URL filtering as source
+- Added new filtering options to existing sources (google, facebook)
+
 # 0.7.2 - 15.04.2024
 - Added new type for Google sources
 
