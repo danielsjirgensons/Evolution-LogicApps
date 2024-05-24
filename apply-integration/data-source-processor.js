@@ -10,10 +10,10 @@ class Source {
         console.log(`DIRECT SOURCE: ${this.sourceLabel} - ${referralData}`);
     }
 
-    getSource(data) {
+    getSource(data, pageUrl) {
         if (data !== 'undefined') {
             let source = '';
-            this.referralData = this.getReferral(data);
+            this.referralData = this.getReferral(data, pageUrl);
             const notContainWebUrl = (value) => !/evolution\.com/i.test(value);
 
             if (this.referralData !== null) {
@@ -30,6 +30,13 @@ class Source {
 
                         if ((this.referralData[key] !== '' && notContainWebUrl(this.referralData[key]) || key === 'starting')) {
                             source = this.referralData[key];
+
+                            // Double check for direct
+                            if (this.filterSource(source).sourceLabel === 'direct') {
+                                if (key !== 'starting') {
+                                    source = '';
+                                }
+                            }
 
                             // Double filter for facebook
                             if (this.filterSource(source).sourceLabel === 'facebook') {
@@ -49,21 +56,49 @@ class Source {
         return this;
     }
 
-    getReferral(data) {
+    getReferral(data, pageUrl) {
         let referral = '';
 
         try {
             referral = JSON.parse(data);
         } catch (e) {
-            referral = null;
+            // Check if referral data contains simple URL
+            if (this.referralIsUrl(data)) {
+                referral = {
+                    starting: pageUrl,
+                    server: data,
+                    referrer: '',
+                };
+            } else {
+                referral = null;
+            }
         }
 
         return referral;
     }
 
+    // Check if referral data contains URL
+    referralIsUrl(url) {
+        let isUrl;
+
+        try {
+            const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+                '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
+                '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+                '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+                '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+                '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+            isUrl = pattern.test(url);
+        } catch (e) {
+            isUrl = false;
+        }
+
+        return isUrl;
+    }
+
     filterSource(source) {
         switch (true) {
-            case /\b(google|googleads|gclid|adsensecustomsearchads|googlesyndication|syndicatedsearch\.goog|utm_source=google)\b/i.test(source): // Google
+            case /\b(google|googleads|gclid|gad_source|adsensecustomsearchads|googlesyndication|syndicatedsearch\.goog|utm_source=google)\b/i.test(source): // Google
                 this.sourceLabel = 'google';
                 this.sourceId = 'd74ccbf5-53b2-4024-b5f1-475643dd2e14';
                 break;
@@ -71,7 +106,7 @@ class Source {
                 this.sourceLabel = 'bing';
                 this.sourceId = '28934fe0-0db1-4637-b28c-5fd4352ef40e';
                 break;
-            case /\b(facebook|fbclid)\b/i.test(source) && !/instagram/i.test(source): // Facebook
+            case /\b(facebook|fbclid|utm_source=meta)\b/i.test(source) && !/instagram/i.test(source): // Facebook
                 this.sourceLabel = 'facebook';
                 this.sourceId = '2e635be6-2d38-414f-90d5-9bb99f86c908';
                 break;
@@ -121,7 +156,7 @@ class Source {
                 this.sourceLabel = 'ejobs.ro';
                 this.sourceId = '872ca014-f86f-4790-8999-4a1cfb4bf686';
                 break;
-            
+
             /**
              * Latvia specific sources
              */
@@ -141,7 +176,7 @@ class Source {
                 this.sourceLabel = 'ss.lv';
                 this.sourceId = 'a53a5166-825a-409c-b192-a385dbea630f';
                 break;
-            
+
             /**
              * Georgia specific sources
              */
