@@ -69,6 +69,9 @@ $(function () {
             case 'snapchat':
                 targetSource = '2d9e647f-ca18-4da7-9fb2-13c3de3641f1';
                 break;
+            case 'googleads':
+                targetSource = '1c62e4de-67dc-4c7b-9eaa-6386c5d37c4d';
+                break;
             default:
                 targetSource = '09bd1373-5f90-470d-8baa-c617c82c10e1';
         }
