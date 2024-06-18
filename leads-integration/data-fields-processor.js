@@ -20,7 +20,7 @@ $(function () {
         var withoutEmojis = withoutSpecialChars.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, "");
 
         // Remove ASCII symbols
-        var withoutAsciiSymbols = withoutEmojis.replace(/[^\w\s,.;?]/g, "");
+        var withoutAsciiSymbols = withoutEmojis.replace(/[^\p{L}\p{N}\s,.;?]/gu, "");
 
         return withoutAsciiSymbols.trim();
     };
